@@ -29,6 +29,7 @@ const schema = yup.object().shape({
 
 const RaffleForm = () => {
   const [isThanksPopupOpen, setIsThanksPopupOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -45,7 +46,6 @@ const RaffleForm = () => {
     let id;
     let isUnique = false;
     while (!isUnique) {
-      // Генеруємо випадкове число в діапазоні від 50 до 500
       id = Math.floor(Math.random() * (500 - 50 + 1)) + 50;
       try {
         const res = await fetch(`/api/check-id?id=${id}`);
@@ -55,15 +55,12 @@ const RaffleForm = () => {
         }
       } catch (error) {
         console.error("Error checking id uniqueness:", error);
-        // За замовчуванням припускаємо, що id унікальний, щоб уникнути зациклення
         isUnique = true;
       }
     }
-    // Записуємо згенерований id у приховане поле форми
     setValue("id", id);
   };
 
-  // Генеруємо унікальний id при монтуванні компонента
   useEffect(() => {
     generateUniqueId();
   }, [setValue, reset]);
@@ -71,6 +68,7 @@ const RaffleForm = () => {
   const onSubmit = async (formData) => {
     console.log("Form data: ", formData);
     try {
+      setIsLoading(true);
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: {
@@ -86,6 +84,8 @@ const RaffleForm = () => {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -98,7 +98,6 @@ const RaffleForm = () => {
     <>
       <div className={styles.form}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Приховане поле id */}
           <input type="hidden" {...register("id")} />
 
           {/* First Name */}
@@ -208,7 +207,7 @@ const RaffleForm = () => {
 
           {/* Submit Button */}
           <button type="submit">
-            Join the Raffle <WhiteArrow />
+            {isLoading ? "Loading..." : "Join the Raffle"} <WhiteArrow />
           </button>
         </form>
       </div>

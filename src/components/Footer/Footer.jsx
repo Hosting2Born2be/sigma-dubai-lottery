@@ -18,11 +18,11 @@ const Footer = () => {
             <p>Smart electronic moneysolution in your pocket.</p>
           </div>
           <div className={styles.col2}>
-            <Link href="#">
+            <Link href="https://clarityglobalinc.com">
               <Website />
               Our Website
             </Link>
-            <Link href="#">
+            <Link href="https://clarityglobalinc.com/privacy-policy.html">
               <Privacy />
               Our Privacy
             </Link>
