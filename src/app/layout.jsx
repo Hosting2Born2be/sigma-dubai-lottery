@@ -1,9 +1,15 @@
 import { Montserrat } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import localFont from "next/font/local";
 import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 const mont = localFont({
   src: [
+    {
+      path: "./fonts/Mont-Light.ttf",
+      weight: "400",
+      style: "normal",
+    },
     {
       path: "./fonts/Mont-Regular.ttf",
       weight: "600",
@@ -34,6 +40,7 @@ export default function RootLayout({ children }) {
       <body style={{ fontFamily: mont.style.fontFamily }}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
