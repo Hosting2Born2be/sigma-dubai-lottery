@@ -1,0 +1,35 @@
+.features {
+  padding: 65px 0;
+  background: #f6f6f6;
+  .body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    .item {
+      width: calc(33.33% - 20px);
+      flex-grow: 1;
+      padding: 30px;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.05);
+      @media (max-width: 992px) {
+        width: 100%;
+      }
+      h3 {
+        color: #2d2d2d;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin: 10px 0;
+      }
+      p {
+        color: #2d2d2d;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+  }
+}
