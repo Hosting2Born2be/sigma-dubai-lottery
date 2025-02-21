@@ -139,10 +139,7 @@ padding: 16px;">
                     What Happens Next?
                 </p>
                 <ul style="font-size: 10px;color: #2D2D2D;padding-left: 12px;">
-                    <li>The registration will be closed at [time and date]</li>
-                    <li>The raffle will take place at our booth during the event at [time and date]</li>
-                    <li>The raffle will be conducted digitally at the Clarity Global booth during the conference. Visit
-                        us for the live draw and your chance to win!</li>
+                    <li>The raffle will take place at our booth during the event at SIGMA Dubai 2025</li>
                     <li>If you win, you will receive a personal email notification with instructions on how to claim
                         your prize.</li>
                 </ul>
