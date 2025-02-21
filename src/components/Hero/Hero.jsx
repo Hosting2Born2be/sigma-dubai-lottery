@@ -46,7 +46,7 @@ const Hero = () => {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Link href="/" className={styles.button}>
+            <Link href="#raffle" className={styles.button}>
               Enter the Raffle <WhiteArrow />
             </Link>
           </motion.div>

@@ -1,0 +1,77 @@
+.form {
+  form {
+    border-radius: 24px;
+    background: #f6f6f6;
+    width: 694px;
+    padding: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    @media (max-width: 992px) {
+      width: 100%;
+      padding: 16px;
+    }
+
+    .inputWrapper {
+      width: calc(50% - 10px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      @media (max-width: 992px) {
+        width: 100%;
+      }
+      &.wide {
+        width: 100%;
+      }
+      label {
+        color: #2d2d2d;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+      }
+      > span {
+        color: #f83a3a;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      input {
+        border-radius: 20px;
+        border: 1px solid #dcdcdc;
+        background: #fff;
+        padding: 0 20px;
+        height: 44px;
+        color: #2d2d2d;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        &.invalid {
+          border: 1px solid #f83a3a;
+        }
+      }
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 100px;
+      background: #f85c3a;
+      width: 100%;
+      color: #fff;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      border: none;
+      padding: 20px;
+      cursor: pointer;
+    }
+  }
+}

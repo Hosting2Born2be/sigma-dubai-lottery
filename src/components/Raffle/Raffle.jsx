@@ -3,10 +3,11 @@ import React from "react";
 import styles from "./Raffle.module.scss";
 import { fadeInUp } from "@/utils/animations";
 import { motion } from "framer-motion";
+import RaffleForm from "../Form/RaffleForm";
 
 const Raffle = () => {
   return (
-    <section className={styles.raffle}>
+    <section className={styles.raffle} id="raffle">
       <div className="container">
         <div className={styles.body}>
           <motion.h2
@@ -33,6 +34,7 @@ const Raffle = () => {
           >
             Winners will be announced digitally at our booth
           </motion.span>
+          <RaffleForm />
         </div>
       </div>
     </section>
