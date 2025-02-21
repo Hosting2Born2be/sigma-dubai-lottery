@@ -15,7 +15,11 @@ const Header = () => {
             <Link href={"#features"}>Features</Link>
             <Link href={"#raffle"}>Raffle</Link>
           </nav>
-          <Link href={"#raffle"} className={styles.button}>
+          <Link
+            href="https://t.me/+O2DTGj6u8MY5Y2Jk"
+            target="_blank"
+            className={styles.button}
+          >
             Join
           </Link>
         </div>
