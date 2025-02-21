@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,8 +8,9 @@ import styles from "./RaffleForm.module.scss";
 import WhiteArrow from "@/icons/WhiteArrow";
 import ThanksPopup from "../ThanksPopup/ThanksPopup";
 
-// Визначаємо схему валідації за допомогою yup
+// Оновлюємо схему валідації, додаючи поле id
 const schema = yup.object().shape({
+  id: yup.number().required(),
   firstName: yup.string().required("This field is required!"),
   lastName: yup.string().required("This field is required!"),
   phone: yup.string().required("This field is required!"),
@@ -33,20 +34,73 @@ const RaffleForm = () => {
     register,
     handleSubmit,
     control,
+    reset,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log("Form data: ", data);
-    setIsThanksPopupOpen(true);
+  const generateUniqueId = async () => {
+    let id;
+    let isUnique = false;
+    while (!isUnique) {
+      // Генеруємо випадкове число в діапазоні від 50 до 500
+      id = Math.floor(Math.random() * (500 - 50 + 1)) + 50;
+      try {
+        const res = await fetch(`/api/check-id?id=${id}`);
+        const data = await res.json();
+        if (data.unique) {
+          isUnique = true;
+        }
+      } catch (error) {
+        console.error("Error checking id uniqueness:", error);
+        // За замовчуванням припускаємо, що id унікальний, щоб уникнути зациклення
+        isUnique = true;
+      }
+    }
+    // Записуємо згенерований id у приховане поле форми
+    setValue("id", id);
+  };
+
+  // Генеруємо унікальний id при монтуванні компонента
+  useEffect(() => {
+    generateUniqueId();
+  }, [setValue, reset]);
+
+  const onSubmit = async (formData) => {
+    console.log("Form data: ", formData);
+    try {
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setIsThanksPopupOpen(true);
+        reset();
+      } else {
+        console.error("Submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
+
+  const handleCloseThanksPopup = () => {
+    setIsThanksPopupOpen(false);
+    generateUniqueId();
   };
 
   return (
     <>
       <div className={styles.form}>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Приховане поле id */}
+          <input type="hidden" {...register("id")} />
+
           {/* First Name */}
           <div className={styles.inputWrapper}>
             <label htmlFor="firstName">First Name*</label>
@@ -160,7 +214,7 @@ const RaffleForm = () => {
       </div>
       <ThanksPopup
         isOpen={isThanksPopupOpen}
-        onClose={() => setIsThanksPopupOpen(false)}
+        onClose={() => handleCloseThanksPopup()}
       />
     </>
   );
