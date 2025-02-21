@@ -39,6 +39,25 @@ export async function POST(request) {
       currentPaymentProviders,
     } = body;
 
+    // Створення запису в базі та отримання згенерованого id
+    const insertQuery = `
+      INSERT INTO "sigma-dubai-lottery"
+      ("firstName", "lastName", phone, email, industry, company, "websiteUrl", "currentPaymentProviders")
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING id
+    `;
+    const result = await pool.query(insertQuery, [
+      firstName,
+      lastName,
+      phone,
+      email,
+      industry,
+      company,
+      websiteUrl,
+      currentPaymentProviders,
+    ]);
+    const userId = result.rows[0].id;
+
     const OAuth2 = google.auth.OAuth2;
     const oauth2Client = new OAuth2(
       process.env.EMAIL_CLIENT_ID,
@@ -69,7 +88,7 @@ export async function POST(request) {
       <p><b>Current Payment Providers:</b> ${
         currentPaymentProviders || "N/A"
       }</p>
-      <p><b>ID:</b> ${id}</p>
+      <p><b>ID:</b> ${userId}</p>
       `
     );
 
@@ -123,7 +142,7 @@ padding: 16px;">
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;margin: 0;">
-                            ${id}
+                            ${userId}
                         </p>
                     </td>
                 </table>
@@ -307,35 +326,7 @@ padding: 32px;">
       resource: { raw: clientEmailBody },
     });
 
-    // Перевірка унікальності id
-    const checkResult = await pool.query(
-      'SELECT COUNT(*) FROM "sigma-dubai-lottery" WHERE id = $1',
-      [id]
-    );
-    const count = parseInt(checkResult.rows[0].count, 10);
-    if (count > 0) {
-      return NextResponse.json({ error: "Duplicate id" }, { status: 400 });
-    }
-
-    // Вставка даних у таблицю
-    const insertQuery = `
-      INSERT INTO "sigma-dubai-lottery"
-      (id, "firstName", "lastName", phone, email, industry, company, "websiteUrl", "currentPaymentProviders")
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-    `;
-    await pool.query(insertQuery, [
-      id,
-      firstName,
-      lastName,
-      phone,
-      email,
-      industry,
-      company,
-      websiteUrl,
-      currentPaymentProviders,
-    ]);
-
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, id: userId });
   } catch (error) {
     console.error("Error:", error.message);
     return NextResponse.json(
