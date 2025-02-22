@@ -17,6 +17,7 @@ const StayConnected = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
+              variants={fadeInUp}
             >
               Stay connected!
             </motion.h2>
@@ -24,6 +25,7 @@ const StayConnected = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
+              variants={fadeInUp}
             >
               Join our Telegram channel for live raffle updates.
             </motion.p>
@@ -31,6 +33,7 @@ const StayConnected = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
+              variants={fadeInUp}
             >
               <Link href="https://t.me/+O2DTGj6u8MY5Y2Jk" target="_blank">
                 Join <WhiteArrow />
@@ -46,6 +49,7 @@ const StayConnected = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
+            variants={fadeInUp}
           >
             Meet us at Sigma Dubai and explore how Clarity Global can power your
             business payments!
