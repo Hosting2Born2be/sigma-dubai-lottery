@@ -8,7 +8,6 @@ import styles from "./RaffleForm.module.scss";
 import WhiteArrow from "@/icons/WhiteArrow";
 import ThanksPopup from "../ThanksPopup/ThanksPopup";
 
-// Оновлюємо схему валідації, додаючи поле id
 const schema = yup.object().shape({
   id: yup.number().required(),
   firstName: yup.string().required("This field is required!"),
@@ -19,17 +18,33 @@ const schema = yup.object().shape({
     .email("Invalid email")
     .required("This field is required!"),
   industry: yup.string().required("This field is required!"),
-  company: yup.string(), // не обов'язкове
+  company: yup.string(), 
   websiteUrl: yup
     .string()
     .url("Invalid URL")
     .required("This field is required!"),
-  currentPaymentProviders: yup.string(), // не обов'язкове
+  currentPaymentProviders: yup.string(), 
 });
 
 const RaffleForm = () => {
   const [isThanksPopupOpen, setIsThanksPopupOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userCountry, setUserCountry] = useState("us");
+
+  useEffect(() => {
+    async function fetchUserCountry() {
+      try {
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+        if (data && data.country_code) {
+          setUserCountry(data.country_code.toLowerCase());
+        }
+      } catch (error) {
+        console.error("Error fetching user country:", error);
+      }
+    }
+    fetchUserCountry();
+  }, []);
 
   const {
     register,
@@ -133,7 +148,7 @@ const RaffleForm = () => {
               name="phone"
               render={({ field }) => (
                 <PhoneInput
-                  country={"us"}
+                  country={userCountry}
                   inputProps={{
                     name: "phone",
                     required: true,
