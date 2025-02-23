@@ -263,11 +263,8 @@ padding: 32px;">
                 <table style="width: 100%;">
                     <tr>
                         <td style="width: 33%;vertical-align: baseline;">
-                            <p style="color: #F85C3A;
-                            font-size: 20px;
-                            font-style: normal;
-                            font-weight: 800;
-                            line-height: 140%;margin: 0 0 10px 0;">Clarity Global</p>
+                            <img style="width: 140px;margin-bottom: 10px;" src="https://sigma-dubai-lottery.clarityglobalinc.com/images/email_logo.png"
+                    alt="logo" />
                             <p style="color: #F6F6F6;
                             font-size: 14px;
                             font-style: normal;
