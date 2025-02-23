@@ -30,11 +30,15 @@ const mont = localFont({
 });
 
 export const metadata = {
-  title: "Sigma Dubai",
-  description: "",
+  title:
+    "Clarity Global at Sigma Dubai: Smart, Secure & Seamless Payment Solutions",
+  description:
+    "Join our raffle at Sigma Dubai and discover how Clarity Global’s fast, efficient, and secure payment solutions can empower your business. Enjoy multi-currency support, transparent pricing, and full compliance - all designed for your success!",
   openGraph: {
-    title: "Sigma Dubai",
-    description: "",
+    title:
+      "Clarity Global at Sigma Dubai: Smart, Secure & Seamless Payment Solutions",
+    description:
+      "Join our raffle at Sigma Dubai and discover how Clarity Global’s fast, efficient, and secure payment solutions can empower your business. Enjoy multi-currency support, transparent pricing, and full compliance - all designed for your success!",
   },
 };
 
