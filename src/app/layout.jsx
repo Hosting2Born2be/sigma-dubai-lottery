@@ -32,6 +32,10 @@ const mont = localFont({
 export const metadata = {
   title: "Sigma Dubai",
   description: "",
+  openGraph: {
+    title: "Sigma Dubai",
+    description: "",
+  },
 };
 
 export default function RootLayout({ children }) {

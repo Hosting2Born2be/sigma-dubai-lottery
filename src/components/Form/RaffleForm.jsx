@@ -21,7 +21,6 @@ const schema = yup.object().shape({
   company: yup.string(), 
   websiteUrl: yup
     .string()
-    .url("Invalid URL")
     .required("This field is required!"),
   currentPaymentProviders: yup.string(), 
 });
