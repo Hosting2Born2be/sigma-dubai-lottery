@@ -39,6 +39,8 @@ export const metadata = {
       "Clarity Global at Sigma Dubai: Smart, Secure & Seamless Payment Solutions",
     description:
       "Join our raffle at Sigma Dubai and discover how Clarity Global’s fast, efficient, and secure payment solutions can empower your business. Enjoy multi-currency support, transparent pricing, and full compliance - all designed for your success!",
+    images:
+      "https://sigma-dubai-lottery.clarityglobalinc.com/images/meta.png",
   },
 };
 
